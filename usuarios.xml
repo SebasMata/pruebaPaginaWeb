@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<usuarios>
+    <usuario>
+        <nombre>mataflex29</nombre>
+        <password>12345</password>
+    </usuario>
+    <usuario>
+        <nombre>Admin</nombre>
+        <password>p@ssword</password>
+    </usuario>
+</usuarios>

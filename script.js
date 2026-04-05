@@ -1,25 +1,45 @@
 const nameInput = document.getElementById('nameInput');
-const ageInput = document.getElementById('ageInput');
+const passwordInput = document.getElementById('passwordInput');
 const enterButton = document.getElementById('enterButton');
 const message = document.getElementById('message');
 
-enterButton.addEventListener('click', () => {
+enterButton.addEventListener('click', async () => {
     const name = nameInput.value.trim();
-    const age = parseInt(ageInput.value, 10);
+    const password = passwordInput.value.trim();
 
-    // Validaciones existentes
-    if (!name) {
-        message.textContent = 'Please enter your name.';
+    if (!name || !password) {
+        message.textContent = 'Por favor, completa todos los campos.';
         return;
     }
 
-    if (!ageInput.value || Number.isNaN(age) || age < 0) {
-        message.textContent = 'Please enter a valid age.';
-        return;
+    try {
+        const response = await fetch('usuarios.xml');
+        const xmlText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+
+        const usuarios = xmlDoc.getElementsByTagName("usuario");
+        let accesoConcedido = false;
+
+        for (let i = 0; i < usuarios.length; i++) {
+            const xmlNombre = usuarios[i].getElementsByTagName("nombre")[0].textContent;
+            const xmlPassword = usuarios[i].getElementsByTagName("password")[0].textContent;
+
+            if (xmlNombre === name && xmlPassword === password) {
+                accesoConcedido = true;
+                break;
+            }
+        }
+
+        if (accesoConcedido) {
+            message.textContent = '';
+            window.location.href = 'video.html';
+        } else {
+            message.textContent = 'Usuario o contraseña incorrectos.';
+        }
+
+    } catch (error) {
+        console.error("Error al procesar el XML:", error);
+        message.textContent = 'Error de conexión con la base de datos.';
     }
-
-    message.textContent = '';
-
-    // Redirección a la nueva página
-    window.location.href = 'video.html'; 
 });
