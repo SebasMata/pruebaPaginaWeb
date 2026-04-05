@@ -8,4 +8,8 @@
         <nombre>Admin</nombre>
         <password>p@ssword</password>
     </usuario>
+    <usuario>
+        <nombre>trincador</nombre>
+        <password>donelmergod</password>
+    </usuario>
 </usuarios>
