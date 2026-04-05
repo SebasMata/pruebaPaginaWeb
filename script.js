@@ -43,3 +43,10 @@ enterButton.addEventListener('click', async () => {
         message.textContent = 'Error de conexión con la base de datos.';
     }
 });
+
+const showPasswordCheckbox = document.getElementById('showPassword');
+
+showPasswordCheckbox.addEventListener('change', () => {
+    // Si el checkbox está marcado, el tipo es 'text', si no, es 'password'
+    passwordInput.type = showPasswordCheckbox.checked ? 'text' : 'password';
+});
