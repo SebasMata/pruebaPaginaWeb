@@ -3,13 +3,11 @@ const ageInput = document.getElementById('ageInput');
 const enterButton = document.getElementById('enterButton');
 const message = document.getElementById('message');
 
-const videoFile = './video.mp4';
-let videoEl = null;
-
 enterButton.addEventListener('click', () => {
     const name = nameInput.value.trim();
     const age = parseInt(ageInput.value, 10);
 
+    // Validaciones existentes
     if (!name) {
         message.textContent = 'Please enter your name.';
         return;
@@ -22,15 +20,6 @@ enterButton.addEventListener('click', () => {
 
     message.textContent = '';
 
-    if (!videoEl) {
-        videoEl = document.createElement('video');
-        videoEl.controls = true;
-        videoEl.width = 640;
-        videoEl.style.display = 'block';
-        document.body.appendChild(videoEl);
-    }
-
-    videoEl.src = videoFile;
-    videoEl.load();
-    videoEl.play();
+    // Redirección a la nueva página
+    window.location.href = 'video.html'; 
 });
